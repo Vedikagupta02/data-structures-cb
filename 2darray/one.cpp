@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 int main(){
-    //if we declare int arr[2][4]={{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+    // if we declare int arr[2][4]={{1,2,3,4},{5,6,7,8},{9,10,11,12}};
     //then the values we do not declare wil be zero
     //but if we first declare and then put in values received from the user, then the vlaues will be garbage values
     //so always initialise the array with 0 if we are taking input from user
-    // int arr[100][100];
+    int arr[100][100];
 
     // int r;
     // cin>>r;
@@ -39,6 +39,5 @@ int main(){
     cout<<&arr[0][0]<<endl;
     cout<<&arr[1][0]<<endl;
     cout<<&arr[2][0]<<endl;
-
    
 }
