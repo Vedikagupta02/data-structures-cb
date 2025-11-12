@@ -28,7 +28,7 @@ void mergetwosortedarray(int arr[], int s, int e){
         k++;
     }
 
-    while(i<=mid){
+    while(j<=e){
         temp[k]=arr[j];
         j++;
         k++;

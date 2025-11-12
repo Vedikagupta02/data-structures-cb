@@ -33,7 +33,9 @@ int main(){
     delete fptr;
     fptr=nullptr;
 
-    cout<<*fptr<<endl;
+    // cout<<*fptr<<endl; -->gives segmentation fault bec fptr is deleted
+
+    
 
 
 

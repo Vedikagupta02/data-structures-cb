@@ -6,8 +6,8 @@ long solve(string s, int i, int j, int n){
         return 0;
     }
 
-    for(int l=j;l>=0;l--){
-        return 1+solve(s, i+1, j-1, n);
+    for(int l=j;l>=i;l--){
+        return 1+solve(s, i, j-1, n);
     }
 
     return solve(s, i+1, n-1, n);

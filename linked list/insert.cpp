@@ -120,22 +120,250 @@ void deleteattail(Node*&head, Node*&tail){
     }
 }
 
+int lengthll(Node*&head){
+    int cnt=0;
+    Node*temp=head;
+    while(temp!=NULL){
+        cnt++;
+        temp=temp->next;
+    }
+    return cnt;
+}
+
+int lengthusingrec(Node*head){
+
+    if(head==NULL){
+        return 0;
+    }
+
+    return 1+lengthusingrec(head->next);
+}
+
+void insertatanyposinbtw(Node*&head, Node*&tail, int data, int pos){
+    int n=lengthll(head);
+    if(pos==0){
+        insertatfront(head, tail, data);
+    }
+
+    else if(pos>=n){
+        insertattail(head, tail, data);
+    }
+
+    else{
+        Node*n=new Node(data); //new node created
+        
+        Node*temp=head;
+        for(int jump=1;jump<=pos-1;jump++){
+            temp=temp->next;
+            
+
+        }
+        n->next=temp->next;
+        temp->next=n;
+    }
+}
+
+void deleteatanyposbtw(Node*&head, Node*&tail, int pos){
+    int n=lengthll(head);
+    if(pos==0){
+        deleteatfront(head, tail);
+    }
+    else if(pos>=n-1){
+        deleteattail(head, tail);
+    }
+    else{
+        Node*temp=head;
+        for(int jump=1;jump<=pos-1;jump++){
+            temp=temp->next;
+        }
+
+        Node*temp2=temp->next;
+        temp->next=temp->next->next;
+        delete temp2;
+        temp2=nullptr;
+    }
+
+
+}
+
+bool search(Node*&head, int key){
+    if(head==NULL){
+        return false;
+    }
+
+    Node*temp=head;
+    while(temp!=NULL){
+        if(temp->d==key){
+            return true;
+        }
+        temp=temp->next;
+        
+
+    }
+    return false;
+}
+
+bool searchusingrec(Node*head, int key){
+    if(head==NULL){
+        return false;
+    }
+
+    if(head->d==key){
+        return true;
+    }
+
+    return searchusingrec(head->next, key);
+}
+
+void bubble(Node*&head){
+    int n=lengthll(head);
+        for(Node* temp=head;temp->next!=NULL;temp=temp->next){
+            if(temp->d>temp->next->d){
+                swap(temp->d, temp->next->d);
+                
+            }
+        }
+    
+}
+
+Node* middlell(Node*&head){
+    Node*slow=head;
+    Node*fast=head->next;
+    
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+
+    return slow;
+}
+
+Node* reverse(Node*&head){
+
+    Node*curr=head;
+    Node*prev=NULL;
+    
+    while(curr!=NULL){
+        Node*aagewalapointer=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=aagewalapointer;
+    }
+
+    
+    return prev;
+
+
+}
+
+Node*reverserec(Node*&head, Node*curr, Node*prev){
+    if(curr==NULL){
+        return head;
+    }
+
+    Node*aagewalapointer=curr->next;
+    curr->next=prev;
+
+    return reverserec(head, aagewalapointer, curr);
+
+    head=prev;
+    return head;
+
+    
+}
+
+Node*pivot(Node*head, int pivot){
+
+    Node*temp=head;
+    while(temp->next->d!=pivot){
+        temp=temp->next;
+    }
+
+    Node*newHead=temp->next;
+    temp->next=NULL;
+    Node*gr=reverse(head);
+   
+
+    Node*gg=reverse(newHead);
+
+    head->next=gg;
+
+    return gr;
+
+
+}
+
+Node* kdistfromend(Node*head, int pos){
+    Node*x=head;
+    Node*y=head;
+
+    for(int jump=1;jump<=pos;jump++){
+        y=y->next;
+    }
+
+    while(y!=NULL){
+        x=x->next;
+        y=y->next;
+    }
+
+    return x;
+
+}
+
+
+
 int main(){
 
     Node*head=NULL;
     Node*tail=NULL;
 
-    insertatfront(head, tail, 40);
-    insertatfront(head, tail, 50);
-    insertatfront(head, tail, 60);
-    insertatfront(head, tail, 70);
+    insertatfront(head, tail, 1);
+    insertatfront(head, tail, 2);
+    insertatfront(head, tail, 3);
+    insertatfront(head, tail, 4);
+    insertatfront(head, tail, 5);
+    insertatfront(head, tail, 6);
+    insertatfront(head, tail, 7);
+    insertatfront(head, tail, 8);
 
-    insertattail(head, tail, 10);
 
-    deleteatfront(head, tail);
-    deleteattail(head, tail);
+    // insertattail(head, tail, 5);
 
-    print(head);
+
+    // insertatanyposinbtw(head, tail, 45, 2);
+
+    // deleteatfront(head, tail);
+    // deleteattail(head, tail);
+    // print(head);
+    // // deleteatanyposbtw(head, tail, 3);
+    // cout<<endl;
+
+    // print(head);
+    // cout<<endl;
+
+    // cout<<searchusingrec(head, 24);
+
+    // bubble(head);
+
+    // Node*q=middlell(head);
+    // cout<<q->d<<endl;
+    // print(head);
+
+    // Node*newHead=reverserec(head, head, NULL);
+   
+    // cout<<endl;
+    // print(newHead);
+    // cout<<newHead->d<<endl;
+
+
+    
+    // Node*newnodee=kdistfromend(head, 5);
+    // cout<<newnodee->d<<endl;
+
+    Node*newheadd=pivot(head, 3);
+    print(newheadd);
+    
+    
 }
 
  //head and tail n ko pint karra hai 
