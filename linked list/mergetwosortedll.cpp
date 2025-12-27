@@ -52,6 +52,7 @@ Node*mergetwosortedll(Node*&head1, Node*&head2){
 
     }
 }
+
 Node* middlell(Node*&head){
     Node*slow=head;
     Node*fast=head->next;

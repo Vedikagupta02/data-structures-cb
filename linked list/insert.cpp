@@ -310,7 +310,91 @@ Node* kdistfromend(Node*head, int pos){
 
 }
 
+Node* createcycle(Node*&head, int pos){
+    Node*temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
 
+    Node*curr=head;
+    for(int jump=1;jump<=pos-1;jump++){
+        curr=curr->next;    
+    }
+
+    temp->next=curr;
+    return head;
+}
+bool checkcycle(Node*&head){
+    Node*slow=head;
+    Node*fast= head->next;
+
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+
+        if(slow==fast){
+            return true;
+
+        }
+    }
+    return false;
+}
+
+void breakcycle(Node*&head){
+
+    Node*slow=head;
+    Node*fast= head->next;
+    bool kyacyclemila=false;
+
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+
+        if(slow==fast){
+            kyacyclemila=true;
+            break;
+
+        }
+    }
+
+    if(kyacyclemila==true){
+        //floyd cycle detection
+        Node*slow=head;
+        //tb tak kaam krna jb tak fast-next aur slow->next equal nahi hai
+        while(slow->next!=fast->next){
+            slow=slow->next;
+            fast=fast->next;
+        }
+
+        fast->next=NULL; //breaking the cycle
+
+    }
+}
+
+Node*krev(Node*&head, int k){
+
+    Node*temp=head;
+    for(int jump=1;jump<=k-1;jump++){
+        temp=temp->next;
+    }
+
+    Node*curr=temp->next;
+    temp->next=NULL;
+
+    Node*c=reverse(head);
+
+    Node*newhead=krev(curr, k);
+
+    head->next=newhead;
+
+    return c;
+
+
+
+
+
+
+}
 
 int main(){
 
@@ -360,9 +444,24 @@ int main(){
     // Node*newnodee=kdistfromend(head, 5);
     // cout<<newnodee->d<<endl;
 
-    Node*newheadd=pivot(head, 3);
-    print(newheadd);
-    
+    // Node*newheadd=pivot(head, 3);
+    // print(newheadd);
+
+    // Node*cyclehead=createcycle(head, 4);
+    // cout<<cyclehead->d<<endl;
+    // print(cyclehead);
+
+    // breakcycle(cyclehead);
+    // cout<<checkcycle(cyclehead)<<endl;
+    // print(cyclehead);
+
+    int n=lengthll(head);
+    // int k;
+    // cin>>k;
+
+    Node*newhead=krev(head, 3);
+
+
     
 }
 
