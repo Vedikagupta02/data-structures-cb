@@ -156,7 +156,7 @@ Q diameteroptimized(node*root){
 
     //here recursion is not being called bt in the prev code recursion was called multiple times
     //so we reduce the time complexity to O(n)
-    x.h=1+max(x.h, y.h);
+    z.h=1+max(x.h, y.h);
     int op1=x.d;
     int op2=y.d;
     int op3=x.h+y.h;
@@ -194,47 +194,8 @@ void levelwiseprint(node*root){
     
     
 }
-node*buildquestiontree(int start, int end, vector<int>in, vector<int>pre, int n){
-    // int n;
-    // cin>>n;
-    // vector<int>v;
-    // vector<int>a;
-    // //preorder input
-    // for(int i=0;i<n;i++){
-    //     cin>>v[i];
-    // }
-    
-    // //inorder input
-    // for(int i=0;i<n;i++){
-    //     cin>>a[i];
-    // }
-
-    
-    int ind=-1;
-    int el;
 
 
-    for(int i=0;i<n;i++){
-        if(in[i]==pre[start]){
-            ind=i;
-            el=pre[start];
-            break;
-
-        }
-    }
-    node*root=new node(el);
-
-    //left subtree
-    for(int i=0;i<ind;i++){
-        root->left=buildquestiontree(start+1, end, in, pre, n);
-    }
-
-    for(int i=ind+1;i<n;i++){
-        root->right=buildquestiontree(start+1, end, in, pre, n);
-    }
-
-    return root;
-}
 
 node* levelwisebuild(){
     
@@ -250,24 +211,51 @@ node* levelwisebuild(){
 
     while(!q.empty()){
 
-    node*x=q.front();
-    q.pop();
+        node*x=q.front();
+        q.pop();
 
-    cout<<"enter left and right for "<<x->d<<endl;
-    int lc, rc;
-    cin>>lc>>rc;
-    
-    if(lc=-1){
-    x->left=new node(lc);
-    q.push(x->left);
+        cout<<"enter left and right for "<<x->d<<endl;
+        int lc, rc;
+        cin>>lc>>rc;
+        
+        if(lc=-1){
+            x->left=new node(lc);
+            q.push(x->left);
+        }
+        if(rc!=-1){
+            x->right=new node(rc);
+            q.push(x->right);
+        }
     }
-    if(rc!=-1){
-    x->right=new node(rc);
-    q.push(x->right);
-    }
+
+    return root;
 }
 
-return root;
+int i=0;
+node*buildtreeprein(int s, int e, int pre[], int in[]){
+
+    if(s>e){
+        return NULL;
+    }
+    int x=pre[i];
+    i++;
+    
+    int k;
+    for(int l=s;l<=e;l++){
+        if(in[l]==x){
+            k=l;
+            break;
+
+        }
+
+
+    }
+
+    node*root= new node(x);
+
+    root->left=buildtreeprein(s, k-1, pre, in);
+    root->right=buildtreeprein(k+1, e, pre, in);
+    return root;
 }
 
 int main(){
@@ -281,6 +269,21 @@ int main(){
     cout<<cntnodes(root)<<endl;
     cout<<sum(root)<<endl;
     cout<<height(root)<<endl;
+    int n;
+    cin>>n;
+    vector<int>v;
+    vector<int>a;
+    //preorder input
+    for(int i=0;i<n;i++){
+        cin>>v[i];
+    }
+    
+    //inorder input
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+
+    // buildquestiontree(0, n-1, a, v, n);
 
 
 }

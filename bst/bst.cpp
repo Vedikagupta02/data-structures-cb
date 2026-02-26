@@ -16,24 +16,6 @@ public:
 
 };
 
-node*insertinbst(node*root, int data){
-    if(root==NULL){
-        root=new node(data);
-        return root;
-    }
-
-    else if(data>root->d){
-        //right subtree insert
-        root->right=insertinbst(root->right, data);
-        return root;
-
-    }
-    else{
-        //left subtree insert
-        root->left=insertinbst(root->left, data);
-        return root;
-    }
-}
 void levelwiseprint(node*root){
     queue<node*>q;
     q.push(root);
@@ -61,6 +43,26 @@ void levelwiseprint(node*root){
     }
     
     
+}
+
+
+node*insertinbst(node*root, int data){
+    if(root==NULL){
+        root=new node(data);
+        return root;
+    }
+
+    else if(data>root->d){
+        //right subtree insert
+        root->right=insertinbst(root->right, data);
+        return root;
+
+    }
+    else{
+        //left subtree insert
+        root->left=insertinbst(root->left, data);
+        return root;
+    }
 }
 
 node*buildbst(){
@@ -142,6 +144,8 @@ public:
     }
 
 };
+
+// a balanced tree is a tree in which the height of the abs(left subtree - right subtree)<=1
 //this is an O(n) solution instead of O(n^2) which is brute force solution
 pa isbalanced(node*root){
     pa l;
@@ -183,7 +187,7 @@ bool checkbst(node*root, int min=INT_MIN, int max=INT_MAX){
 
 
 
-node*buildbstusingsirtedarray(int start, int end, int arr[]){
+node*buildbstusingsortedarray(int start, int end, int arr[]){
 
     if(start>end){
         return NULL;
@@ -192,8 +196,8 @@ node*buildbstusingsirtedarray(int start, int end, int arr[]){
     int mid=(start+end)/2;
 
     node*root=new node(arr[mid]);
-    root->left=buildbstusingsirtedarray(start, mid-1, arr);
-    root->right=buildbstusingsirtedarray(mid+1, end, arr);
+    root->left=buildbstusingsortedarray(start, mid-1, arr);
+    root->right=buildbstusingsortedarray(mid+1, end, arr);
 
     return root;
 

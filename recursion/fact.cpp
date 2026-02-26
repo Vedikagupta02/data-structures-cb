@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 int fact(int n){
     //base case
     if(n==0){
